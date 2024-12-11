@@ -77,7 +77,8 @@ const getById = () => async(req,res) => {
 const create = () => async(req,res) => {
     try{
         const id = req.user;
-        const { title, body, img } = req.body;
+        const { title, body } = req.body;
+        const img = req.file.filename? req.file.filename : null;
         const post = await prisma.post.create({
             data : {
                 title,

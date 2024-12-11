@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 //Controladores
 const create = () => async(req,res) => {
     try{
-        const postId = req.params.post;
         const userId = req.user;
+        const postId = parseInt(req.params.post);
         const { comment } = req.body;
         const newComment = await prisma.comment.create({
             data : {

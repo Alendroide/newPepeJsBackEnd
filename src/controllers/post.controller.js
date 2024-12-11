@@ -10,7 +10,19 @@ const getAll = () => async(req,res) => {
         const skip = (parseInt(req.params.skip)-1)*parseInt(process.env.SKIP);
         const posts = await prisma.post.findMany({
             take : parseInt(process.env.SKIP),
-            skip
+            skip,
+            select : {
+                id: true,
+                title : true,
+                body : true,
+                img : true,
+                user : {
+                    select : {
+                        id : true,
+                        name : true
+                    }
+                }
+            }
         })
         if(posts.length === 0){
             return res.status(200).json({msg:"No posts to show"});
@@ -35,7 +47,17 @@ const getById = () => async(req,res) => {
                 title : true,
                 body : true,
                 img : true,
-                comments : true,
+                comments : {
+                    select : {
+                        comment : true,
+                        user : {
+                            select : {
+                                id : true,
+                                name : true
+                            }
+                        }
+                    }
+                },
                 user : {
                     select : {
                         id : true,

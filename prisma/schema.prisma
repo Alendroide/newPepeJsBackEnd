@@ -19,6 +19,7 @@ model User {
   bio String
   email String @unique
   password String
+  created_at DateTime @default(now())
   posts Post[]
   comments Comment[]
 }
@@ -28,6 +29,7 @@ model Post {
   title String
   body String
   img String?
+  created_at DateTime @default(now())
   userId Int
   user User @relation(fields: [userId], references: [id])
   comments Comment[]
@@ -36,6 +38,7 @@ model Post {
 model Comment {
   id Int @id @default(autoincrement())
   comment String
+  created_at DateTime @default(now())
   userId Int
   postId Int
   user User @relation(fields: [userId], references: [id])

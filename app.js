@@ -3,6 +3,7 @@ const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 //Inicialización del server
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan());
 app.use('/public',express.static('./public'));
+app.use(cors());
 
 //Rutas
 const route = __dirname + '/src/routers/';

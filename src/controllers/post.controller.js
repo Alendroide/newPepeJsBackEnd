@@ -16,12 +16,13 @@ const getAll = () => async(req,res) => {
                 title : true,
                 body : true,
                 img : true,
+                created_at : true,
                 user : {
                     select : {
                         id : true,
                         name : true
                     }
-                }
+                },
             }
         })
         if(posts.length === 0){
@@ -47,9 +48,11 @@ const getById = () => async(req,res) => {
                 title : true,
                 body : true,
                 img : true,
+                created_at : true,
                 comments : {
                     select : {
                         comment : true,
+                        created_at : true,
                         user : {
                             select : {
                                 id : true,

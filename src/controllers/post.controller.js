@@ -84,7 +84,7 @@ const create = () => async(req,res) => {
     try{
         const id = req.user;
         const { title, body } = req.body;
-        const img = req.file.filename? req.file.filename : null;
+        const img = req.file?.filename? `http://localhost:4000/public/img/${req.file.filename}` : null;
         const post = await prisma.post.create({
             data : {
                 title,
@@ -92,7 +92,7 @@ const create = () => async(req,res) => {
                 img,
                 userId : id,
             }
-        })
+        });
         res.status(201).json(post);
     }
     catch(error){

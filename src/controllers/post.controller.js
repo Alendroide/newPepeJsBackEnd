@@ -23,6 +23,9 @@ const getAll = () => async(req,res) => {
                         name : true
                     }
                 },
+            },
+            orderBy : {
+                created_at : 'desc'
             }
         })
         if(posts.length === 0){

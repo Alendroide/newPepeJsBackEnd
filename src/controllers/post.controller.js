@@ -62,6 +62,9 @@ const getById = () => async(req,res) => {
                                 name : true
                             }
                         }
+                    },
+                    orderBy : {
+                        created_at : 'desc'
                     }
                 },
                 user : {

@@ -20,7 +20,8 @@ const getAll = () => async(req,res) => {
                 user : {
                     select : {
                         id : true,
-                        name : true
+                        name : true,
+                        img : true
                     }
                 },
             },
@@ -59,7 +60,8 @@ const getById = () => async(req,res) => {
                         user : {
                             select : {
                                 id : true,
-                                name : true
+                                name : true,
+                                img : true
                             }
                         }
                     },
@@ -70,7 +72,8 @@ const getById = () => async(req,res) => {
                 user : {
                     select : {
                         id : true,
-                        name : true
+                        name : true,
+                        img : true
                     }
                 }
             }

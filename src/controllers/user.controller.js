@@ -32,10 +32,15 @@ const getById = () => async(req,res) => {
 
 const register = () => async(req,res) => {
     try{
+        const img = req.file?.filename? `http://localhost:4000/public/pfp/${req.file.filename}` : null;
         const { name, bio, email, password } = req.body;
         const encrypted = await bcrypt.hash(password,10);
         const data = {
-            name, bio, email, password : encrypted
+            img,
+            name,
+            bio,
+            email,
+            password : encrypted
         }
         const user = await prisma.user.create({data});
         res.status(201).json(user)

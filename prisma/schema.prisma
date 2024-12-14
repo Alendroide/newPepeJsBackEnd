@@ -16,7 +16,7 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   img String?
-  name String
+  name String @unique
   bio String
   email String @unique
   password String
@@ -27,8 +27,8 @@ model User {
 
 model Post {
   id Int @id @default(autoincrement())
-  title String
-  body String
+  title String @db.VarChar(100)
+  body String @db.Text
   img String?
   created_at DateTime @default(now())
   userId Int

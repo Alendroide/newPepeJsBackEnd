@@ -90,6 +90,9 @@ const create = () => async(req,res) => {
     try{
         const id = req.user;
         const { title, body } = req.body;
+        if(body.length > 1000){
+            return res.status(400).json({msg:"Bad request"});
+        }
         const img = req.file?.filename? `http://localhost:4000/public/img/${req.file.filename}` : null;
         const post = await prisma.post.create({
             data : {

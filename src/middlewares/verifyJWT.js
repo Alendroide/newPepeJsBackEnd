@@ -18,6 +18,9 @@ const verifyJWT = () => async(req,res,next) => {
         if(error.message == 'invalid token'){
             return res.status(400).json({msg:"Invalid Token"});
         }
+        if(error.message == 'invalid signature'){
+            return res.status(400).json({msg:"Invalid token signature"});
+        }
         console.error(error);
         res.status(500).json({msg:"Internal server error"});
     }

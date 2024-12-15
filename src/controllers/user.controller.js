@@ -23,7 +23,14 @@ const getById = () => async(req,res) => {
         if(!user){
             return res.status(404).json({msg:"User not found"})
         }
-        res.status(200).json(user);
+
+        const postNumber = await prisma.post.count({
+            where : {
+                userId : id
+            }
+        })
+
+        res.status(200).json({...user,posts:postNumber});
     }
     catch(error){
         console.error(error);

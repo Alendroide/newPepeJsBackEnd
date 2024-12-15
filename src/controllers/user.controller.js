@@ -16,7 +16,8 @@ const getById = () => async(req,res) => {
             select : {
                 id : true,
                 name : true,
-                bio : true
+                bio : true,
+                img : true
             }
         });
         if(!user){

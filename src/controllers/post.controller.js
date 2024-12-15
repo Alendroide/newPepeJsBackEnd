@@ -24,6 +24,11 @@ const getAll = () => async(req,res) => {
                         img : true
                     }
                 },
+                _count : {
+                    select : {
+                        comments : true
+                    }
+                }
             },
             orderBy : {
                 created_at : 'desc'
@@ -75,10 +80,51 @@ const getById = () => async(req,res) => {
                         name : true,
                         img : true
                     }
+                },
+                _count : {
+                    select : {
+                        comments : true
+                    }
                 }
             }
         });
         res.status(200).json(post)
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({msg:"Internal server error"});
+    }
+}
+
+const getByUser = () => async(req,res) => {
+    try{
+        const id = parseInt(req.params.id);
+        const posts = await prisma.post.findMany({
+            where : {
+                userId : id
+            },
+            select : {
+                id : true,
+                title : true,
+                body : true,
+                img : true,
+                created_at : true,
+                user : {
+                    select : {
+                        id : true,
+                        name : true,
+                        img : true
+                    }
+                },
+                _count : {
+                    select : {
+                        comments : true
+                    }
+                },
+            },
+            take : 5
+        });
+        res.status(200).json(posts)
     }
     catch(error){
         console.error(error);
@@ -113,5 +159,6 @@ const create = () => async(req,res) => {
 module.exports = {
     getAll,
     create,
-    getById
+    getById,
+    getByUser
 }

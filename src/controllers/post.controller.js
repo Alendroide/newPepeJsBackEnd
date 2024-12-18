@@ -122,7 +122,10 @@ const getByUser = () => async(req,res) => {
                     }
                 },
             },
-            take : 5
+            take : 5,
+            orderBy : {
+                created_at : 'desc'
+            }
         });
         res.status(200).json(posts)
     }
